@@ -24,12 +24,12 @@ public class DummyData {
     @PostConstruct
     public void createData() {
         ProductCreateDTO[] productCreateDTOS = {
-                new ProductCreateDTO("Brie"),
-                new ProductCreateDTO("Gouda"),
-                new ProductCreateDTO("La Vache Qui Rit"),
-                new ProductCreateDTO("La Vache Qui Rit (Vegan)"),
-                new ProductCreateDTO("Mozzarella"),
-                new ProductCreateDTO("Mozzarella Tradizionale")
+                new ProductCreateDTO("Brie", "1 kilo", 3.45f, 4, ""),
+                new ProductCreateDTO("Gouda", "1 kilo", 10.4f, 10, "https://president-professionnel.com/wp-content/uploads/2024/02/gouda-wheel-president.png"),
+                new ProductCreateDTO("La Vache Qui Rit", "", 5f, 5, ""),
+                new ProductCreateDTO("La Vache Qui Rit (Vegan)", "", 4.5f, 2, "https://www.lavachequirit.ca/wp-content/uploads/2024/01/plant-product-single-768x768.png"),
+                new ProductCreateDTO("Mozzarella", "italiano", 4.65f, 10, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg"),
+                new ProductCreateDTO("Mozzarella Tradizionale", "", 6f, 10, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg")
         };
         for(ProductCreateDTO acd : productCreateDTOS) {
             productController.createProduct(acd);

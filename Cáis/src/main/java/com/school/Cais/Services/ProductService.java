@@ -5,6 +5,7 @@ import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Product;
 import com.school.Cais.Repositories.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    @Transactional
     public ProductDTO createProduct(ProductCreateDTO createDTO) {
         List<Product> existingProducts = productRepository.findAll();
         for(Product existingProduct : existingProducts)

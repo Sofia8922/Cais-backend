@@ -3,8 +3,12 @@ package com.school.Cais.Models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -19,6 +23,8 @@ public class Product {
     @NotNull
     private int stock;
     private String imageLink;
+    @OneToMany(mappedBy = "product")
+    private List<Purchase> purchaseList = new ArrayList<>();
 
     public Long getId() {
         return id;

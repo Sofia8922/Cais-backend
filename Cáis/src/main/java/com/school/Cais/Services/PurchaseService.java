@@ -25,11 +25,10 @@ public class PurchaseService {
     }
 
     @Transactional
-    public PurchaseDTO createOrder(PurchaseCreateDTO createDTO) {
+    public PurchaseDTO createPurchase(PurchaseCreateDTO createDTO) {
         Purchase purchase = createDTO.toEntity();
-
         Product product = productRepository.findById(createDTO.productId())
-            .orElseGet(ErrorHandler.notFound("product"));
+            .orElseGet(() -> ErrorHandler.notFound("product"));
 
         purchase.setProduct(product);
 

@@ -11,11 +11,11 @@ public class Purchase {
     private Long id;
     @NotNull
     private int amount;
-    @NotNull
-    private Constants.DeliveryStatus status;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    @NotNull
+    private Constants.DeliveryStatus status;
 
     public Long getId() {
         return id;

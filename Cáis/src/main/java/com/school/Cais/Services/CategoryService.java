@@ -1,0 +1,42 @@
+package com.school.Cais.Services;
+
+import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
+import com.school.Cais.DTOs.Categories.CategoryDTO;
+import com.school.Cais.DTOs.Purchases.PurchaseDTO;
+import com.school.Cais.Miscellaneous.ErrorHandler;
+import com.school.Cais.Models.Category;
+import com.school.Cais.Models.Product;
+import com.school.Cais.Models.Purchase;
+import com.school.Cais.Repositories.CategoryRepository;
+import com.school.Cais.Repositories.SubcategoryRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CategoryService {
+    private final CategoryRepository categoryRepository;
+    private final SubcategoryRepository subcategoryRepository;
+
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository, SubcategoryRepository subcategoryRepository) {
+        this.categoryRepository = categoryRepository;
+        this.subcategoryRepository = subcategoryRepository;
+    }
+
+    @Transactional
+    public CategoryDTO createCategory(CategoryCreateDTO createDTO) {
+        Category category = createDTO.toEntity();
+        Category savedCategory = categoryRepository.save(category);
+        return CategoryDTO.fromEntity(savedCategory);
+    }
+
+    public List<CategoryDTO> findAll() {
+        return categoryRepository.findAll()
+            .stream()
+            .map(CategoryDTO::fromEntity)
+            .toList();
+    }
+}

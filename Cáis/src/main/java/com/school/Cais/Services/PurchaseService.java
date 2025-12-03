@@ -17,11 +17,13 @@ import java.util.List;
 public class PurchaseService {
     private final PurchaseRepository purchaseRepository;
     private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
-    public PurchaseService(PurchaseRepository purchaseRepository, ProductRepository productRepository) {
+    public PurchaseService(PurchaseRepository purchaseRepository, ProductRepository productRepository, ProductService productService) {
         this.purchaseRepository = purchaseRepository;
         this.productRepository = productRepository;
+        this.productService = productService;
     }
 
     @Transactional
@@ -31,6 +33,7 @@ public class PurchaseService {
             .orElseGet(() -> ErrorHandler.notFound("product"));
 
         purchase.setProduct(product);
+        productService.updateStock(product.getId(), -1 * createDTO.amount());
 
         Purchase savedPurchase = purchaseRepository.save(purchase);
         return PurchaseDTO.fromEntity(savedPurchase);

@@ -5,11 +5,9 @@ import com.school.Cais.Controllers.PurchaseController;
 import com.school.Cais.Controllers.ProductController;
 import com.school.Cais.Controllers.SubcategoryController;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
-import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseCreateDTO;
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryCreateDTO;
-import com.school.Cais.DTOs.Subcategories.SubcategoryDTO;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -59,7 +57,7 @@ public class DummyData {
             new ProductCreateDTO("La Vache Qui Rit", "", 5f, 5, "", 3L),
             new ProductCreateDTO("La Vache Qui Rit (Vegan)", "", 4.5f, 2, "https://www.lavachequirit.ca/wp-content/uploads/2024/01/plant-product-single-768x768.png", 3L),
             new ProductCreateDTO("Mozzarella", "italiano", 4.65f, 0, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg", 2L),
-            new ProductCreateDTO("Mozzarella Tradizionale", "", 6f, 10, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg", 2L),
+            new ProductCreateDTO("Mozzarella Tradizionale", "", 6f, 500, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg", 2L),
             new ProductCreateDTO("Standard Cheese Slicer", "The best one", 20f, 0, "", 4L)
         };
         for(ProductCreateDTO pcd : productCreateDTOS) {
@@ -68,7 +66,8 @@ public class DummyData {
         //---------------------------------------------------
         PurchaseCreateDTO[] purchaseCreateDTOS = {
             new PurchaseCreateDTO(2, 2L),
-            new PurchaseCreateDTO(1, 2L)
+            new PurchaseCreateDTO(1, 2L),
+            new PurchaseCreateDTO(4, 6L)
         };
         for(PurchaseCreateDTO prcd : purchaseCreateDTOS) {
             purchaseController.createPurchase(prcd);

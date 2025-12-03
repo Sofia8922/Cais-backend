@@ -2,10 +2,7 @@ package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Categories.CategoryDTO;
-import com.school.Cais.DTOs.Products.ProductCreateDTO;
-import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.Services.CategoryService;
-import com.school.Cais.Services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

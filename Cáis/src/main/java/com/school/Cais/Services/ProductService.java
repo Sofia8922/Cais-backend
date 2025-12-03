@@ -9,6 +9,7 @@ import com.school.Cais.Models.Subcategory;
 import com.school.Cais.Repositories.ProductRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +50,19 @@ public class ProductService {
                 .stream()
                 .map(ProductDTO::fromEntity)
                 .toList();
+    }
+
+    @Transactional
+    public ProductDTO updateStock(Long productId, int change) {
+        Product product = productRepository.findById(productId)
+                .orElseGet(() -> ErrorHandler.notFound("product"));
+
+        int newStock = product.getStock() + change;
+        if(newStock < 0)
+            ErrorHandler.soldOut(product.getName(), product.getStock());
+
+        product.setStock(newStock);
+        Product savedProduct = productRepository.save(product);
+        return ProductDTO.fromEntity(savedProduct);
     }
 }

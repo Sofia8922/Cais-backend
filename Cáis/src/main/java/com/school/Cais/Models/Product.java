@@ -26,6 +26,17 @@ public class Product {
     private List<Purchase> purchaseList = new ArrayList<>();
     private String imageLink;
 
+    public Product() {
+    }
+
+    public Product(String name, String description, Float price, int stock, String imageLink) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.imageLink = imageLink;
+    }
+
     public Long getId() {
         return id;
     }

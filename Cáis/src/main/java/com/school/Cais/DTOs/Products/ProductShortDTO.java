@@ -1,17 +1,14 @@
 package com.school.Cais.DTOs.Products;
 
 import com.school.Cais.DTOs.Purchases.PurchaseDTO;
-import com.school.Cais.DTOs.Purchases.PurchaseShortDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryDTO;
 import com.school.Cais.Models.Product;
-import com.school.Cais.Models.Subcategory;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public record ProductDTO(
+public record ProductShortDTO(
         @NotBlank
         String name,
         String description,
@@ -21,18 +18,16 @@ public record ProductDTO(
         int stock,
         String imageLink,
         @NotNull
-        SubcategoryDTO subcategory,
-        List<PurchaseShortDTO> purchases
+        SubcategoryDTO subcategory
 ) {
-    public static ProductDTO fromEntity(Product product) {
-        return new ProductDTO(
+    public static ProductShortDTO fromEntity(Product product) {
+        return new ProductShortDTO(
             product.getName(),
             product.getDescription(),
             product.getPrice(),
             product.getStock(),
             product.getImageLink(),
-            SubcategoryDTO.fromEntity(product.getSubcategory()),
-            product.getPurchaseList().stream().map(PurchaseShortDTO::fromEntity).toList()
+            SubcategoryDTO.fromEntity(product.getSubcategory())
         );
     }
 }

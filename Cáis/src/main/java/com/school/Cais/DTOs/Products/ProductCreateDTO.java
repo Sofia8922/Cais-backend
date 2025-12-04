@@ -12,7 +12,9 @@ public record ProductCreateDTO(
         Float price,
         @NotNull
         int stock,
-        String imageLink
+        String imageLink,
+        @NotNull
+        Long subcategoryId
 ) {
     public Product toEntity() {
         Product product = new Product();

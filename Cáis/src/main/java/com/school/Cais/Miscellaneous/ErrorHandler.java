@@ -20,6 +20,10 @@ public class ErrorHandler {
         return throwError(topic + " not found", HttpStatus.NOT_FOUND);
     }
 
+    public static <T> T soldOut(String topic, int amount){
+        return throwError("There are only " + amount + " products \"" + topic + "\" left in stock", HttpStatus.CONFLICT);
+    }
+
     private static <T> T throwError(String message, HttpStatus status) {
         message = message.substring(0, 1).toUpperCase() + message.substring(1);
         ResponseStatusException ex = new ResponseStatusException(status, message);

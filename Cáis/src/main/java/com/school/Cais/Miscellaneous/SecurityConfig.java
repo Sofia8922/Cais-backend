@@ -28,11 +28,11 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-//                        .requestMatchers("/accounts").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/accounts")
-                        .hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/products/**").permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+////                        .requestMatchers("/accounts").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/accounts")
+//                        .hasAnyRole("USER", "ADMIN")
+//                        .requestMatchers("/products/**").permitAll()
                         .anyRequest().permitAll()
 //                        .anyRequest().authenticated()
                 )

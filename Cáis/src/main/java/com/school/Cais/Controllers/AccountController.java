@@ -1,6 +1,7 @@
 package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Accounts.AccountDTO;
+import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Categories.CategoryDTO;
@@ -38,12 +39,21 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findById(id));
     }
 
+
 //    @GetMapping("/cart/{id}")
 //    public ResponseEntity<AccountDTO> getCartByAccountId(@PathVariable Long id) {
 //
 //    }
 
-//    @PutMapping("/addCart")
+    @PostMapping("/{accountId}/cart/{productId}")
+    public ResponseEntity<AccountDTO> addToCart(@PathVariable Long accountId, @PathVariable Long productId, @RequestParam(defaultValue = "1") int amount) {
+        return ResponseEntity.ok(accountService.addToCart(accountId, productId, amount));
+    }
+
+    @DeleteMapping("/{accountId}/cart/{productId}")
+    public ResponseEntity<AccountDTO> removeFromCart(@PathVariable Long accountId, @PathVariable Long productId, @RequestParam(defaultValue = "1") int amount) {
+        return ResponseEntity.ok(accountService.removeFromCart(accountId, productId, amount));
+    }
 
     @PostMapping("/{id}")
     public ResponseEntity<AccountDTO> editAccountById(@PathVariable Long id, @RequestBody AccountUpdateDTO dto) {

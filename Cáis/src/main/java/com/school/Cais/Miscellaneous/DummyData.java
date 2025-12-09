@@ -1,16 +1,17 @@
 package com.school.Cais.Miscellaneous;
 
-import com.school.Cais.Controllers.CategoryController;
-import com.school.Cais.Controllers.PurchaseController;
-import com.school.Cais.Controllers.ProductController;
-import com.school.Cais.Controllers.SubcategoryController;
+import com.school.Cais.Controllers.*;
+import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseCreateDTO;
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryCreateDTO;
+import com.school.Cais.Services.AccountService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class DummyData {
@@ -19,13 +20,15 @@ public class DummyData {
     private final ProductController productController;
     private final PurchaseController purchaseController;
     private final SubcategoryController subcategoryController;
+    private final AccountService accountService;
 
     @Autowired
-    public DummyData(CategoryController categoryController, ProductController productController, PurchaseController purchaseController, SubcategoryController subcategoryController) {
+    public DummyData(CategoryController categoryController, ProductController productController, PurchaseController purchaseController, SubcategoryController subcategoryController, AccountService accountService) {
         this.categoryController = categoryController;
         this.productController = productController;
         this.purchaseController = purchaseController;
         this.subcategoryController = subcategoryController;
+        this.accountService = accountService;
     }
 
     public boolean isStarting() {
@@ -34,6 +37,15 @@ public class DummyData {
 
     @PostConstruct
     public void createData() {
+
+        accountService.register(
+                new AccountRegisterDTO("a", "1", List.of("ADMIN"))
+        );
+        accountService.register(
+                new AccountRegisterDTO("b", "2", List.of("USER"))
+        );
+
+
         CategoryCreateDTO[] categoryCreateDTOS = {
             new CategoryCreateDTO("Cheese"),
             new CategoryCreateDTO("Slicer")

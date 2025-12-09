@@ -1,5 +1,6 @@
 package com.school.Cais.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -19,12 +20,22 @@ public class Account {
     private String password;
     private String address;
     private String phoneNumber;
-    @ManyToMany
-    private List<Product> cart;
-    @ManyToMany
-    private List<Product> favorites;
-    @ManyToMany
-    private List<Product> recentOrders;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartItems = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "account_favorites",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> favorites = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "account_recent_orders",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> recentOrders = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
@@ -81,12 +92,12 @@ public class Account {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Product> getCart() {
-        return cart;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setCart(List<Product> cart) {
-        this.cart = cart;
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 
     public List<Product> getFavorites() {
@@ -111,5 +122,29 @@ public class Account {
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
+    }
+
+    public void addToCart(Product product, int amount) {
+        for (CartItem item : cartItems) {
+            if (item.getProduct().getId().equals(product.getId())) {
+                item.setQuantity(item.getQuantity() + amount);
+                return;
+            }
+        }
+        cartItems.add(new CartItem(this, product, amount));
+    }
+
+    public void removeFromCart(Product product, int amount) {
+        cartItems.removeIf(item -> {
+            if (item.getProduct().getId().equals(product.getId())) {
+                if (item.getQuantity() > amount) {
+                    item.setQuantity(item.getQuantity() - amount);
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 }

@@ -33,8 +33,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/accounts")
                         .hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/products/**").permitAll()
-//                        .anyRequest().permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
+//                        .anyRequest().authenticated()
                 )
 //                .httpBasic(Customizer.withDefaults());
                 .httpBasic(AbstractHttpConfigurer::disable)

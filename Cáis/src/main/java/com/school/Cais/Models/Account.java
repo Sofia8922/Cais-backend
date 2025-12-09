@@ -147,4 +147,14 @@ public class Account {
             return false;
         });
     }
+
+    public void addToFavorites(Product product) {
+        if (!favorites.contains(product)) {
+            favorites.add(product);
+        }
+    }
+
+    public void removeFromFavorites(Product product) {
+        favorites.remove(product);
+    }
 }

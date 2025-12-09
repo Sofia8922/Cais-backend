@@ -111,4 +111,30 @@ public class  AccountService {
         accountRepository.save(account);
         return AccountDTO.fromEntity(account);
     }
+
+    public AccountDTO addToFavorites(Long accountId, Long productId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseGet(() -> ErrorHandler.notFound("Account"));
+
+        Product product = productRepository.findById(productId)
+                .orElseGet(() -> ErrorHandler.notFound("Product"));
+
+        account.addToFavorites(product);
+        accountRepository.save(account);
+
+        return AccountDTO.fromEntity(account);
+    }
+
+    public AccountDTO removeFromFavorites(Long accountId, Long productId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseGet(() -> ErrorHandler.notFound("Account"));
+
+        Product product = productRepository.findById(productId)
+                .orElseGet(() -> ErrorHandler.notFound("Product"));
+
+        account.removeFromFavorites(product);
+        accountRepository.save(account);
+
+        return AccountDTO.fromEntity(account);
+    }
 }

@@ -55,6 +55,16 @@ public class AccountController {
         return ResponseEntity.ok(accountService.removeFromCart(accountId, productId, amount));
     }
 
+    @PostMapping("/{accountId}/favorites/{productId}")
+    public ResponseEntity<AccountDTO> addToFavorites(@PathVariable Long accountId, @PathVariable Long productId) {
+        return ResponseEntity.ok(accountService.addToFavorites(accountId, productId));
+    }
+
+    @DeleteMapping("/{accountId}/favorites/{productId}")
+    public ResponseEntity<AccountDTO> removeFromFavorites(@PathVariable Long accountId, @PathVariable Long productId) {
+        return ResponseEntity.ok(accountService.removeFromFavorites(accountId, productId));
+    }
+
     @PostMapping("/{id}")
     public ResponseEntity<AccountDTO> editAccountById(@PathVariable Long id, @RequestBody AccountUpdateDTO dto) {
         return ResponseEntity.ok(accountService.editAccountById(id, dto));

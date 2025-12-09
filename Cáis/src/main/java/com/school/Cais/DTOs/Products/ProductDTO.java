@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record ProductDTO(
+        Long id,
         @NotBlank
         String name,
         String description,
@@ -26,6 +27,7 @@ public record ProductDTO(
 ) {
     public static ProductDTO fromEntity(Product product) {
         return new ProductDTO(
+            product.getId(),
             product.getName(),
             product.getDescription(),
             product.getPrice(),

@@ -2,6 +2,7 @@ package com.school.Cais.Services;
 
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
+import com.school.Cais.DTOs.Products.ProductUpdateDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Category;
 import com.school.Cais.Models.Product;
@@ -53,16 +54,45 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDTO updateStock(Long productId, int change) {
+    public ProductDTO updateStock(Long productId, int amount) {
         Product product = productRepository.findById(productId)
                 .orElseGet(() -> ErrorHandler.notFound("product"));
 
-        int newStock = product.getStock() + change;
+        int newStock = product.getStock() + amount;
         if(newStock < 0)
             ErrorHandler.soldOut(product.getName(), product.getStock());
 
         product.setStock(newStock);
         Product savedProduct = productRepository.save(product);
         return ProductDTO.fromEntity(savedProduct);
+    }
+
+    @Transactional
+    public ProductDTO findById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("product"));
+        return ProductDTO.fromEntity(product);
+    }
+
+    @Transactional
+    public ProductDTO editById(Long id, ProductUpdateDTO dto) {
+        Product product = productRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("product"));
+
+        dto.updateEntity(product);
+
+        if (subcategoryRepository != null) {
+            Subcategory subcategory = subcategoryRepository.findById(dto.subcategoryId())
+                    .orElseGet(() -> ErrorHandler.notFound("subcategory"));
+            product.setSubcategory(subcategory);
+        }
+
+        return ProductDTO.fromEntity(product);
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("product"));
+        productRepository.delete(product);
     }
 }

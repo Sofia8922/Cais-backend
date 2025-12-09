@@ -1,16 +1,21 @@
 package com.school.Cais.DTOs.Accounts;
 
 import com.school.Cais.Models.Account;
-import com.school.Cais.Models.Category;
 import jakarta.validation.constraints.NotBlank;
 
-public record AccountCreateDTO(
+import java.util.List;
+
+public record AccountRegisterDTO(
         @NotBlank
-        String username
+        String username,
+        String password,
+        List<String> roles
 ) {
     public Account toEntity() {
         Account account = new Account();
         account.setUsername(username);
+        account.setPassword(password);
+        account.setRoles(roles);
         return account;
     }
 }

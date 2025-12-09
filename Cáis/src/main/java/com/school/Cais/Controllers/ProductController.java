@@ -2,6 +2,7 @@ package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
+import com.school.Cais.DTOs.Products.ProductUpdateDTO;
 import com.school.Cais.Services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +36,22 @@ public class ProductController {
         List<ProductDTO> productDTOS = productService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(productDTOS);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductDTO> editProduct(@PathVariable Long id, @RequestBody ProductUpdateDTO dto) {
+        System.out.println("a");
+        return ResponseEntity.ok(productService.editById(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

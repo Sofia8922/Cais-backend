@@ -27,4 +27,12 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Subcategory> getSubcategoryList() {
+        return subcategoryList;
+    }
+
+    public void setSubcategoryList(List<Subcategory> subcategoryList) {
+        this.subcategoryList = subcategoryList;
+    }
 }

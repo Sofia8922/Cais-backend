@@ -4,6 +4,7 @@ import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.DTOs.Products.ProductUpdateDTO;
 import com.school.Cais.Services.ProductService;
+import com.school.Cais.Services.SubcategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,10 +18,12 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
+    private final SubcategoryService subcategoryService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, SubcategoryService subcategoryService) {
         this.productService = productService;
+        this.subcategoryService = subcategoryService;
     }
 
     @PostMapping()
@@ -40,6 +43,11 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.findById(id));
+    }
+
+    @GetMapping("/sub/{id}")
+    public ResponseEntity<List<ProductDTO>> getProductBySubcategory(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.findBySubcat(id));
     }
 
     @PutMapping("/{id}")

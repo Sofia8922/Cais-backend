@@ -4,16 +4,15 @@ import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.DTOs.Products.ProductUpdateDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
-import com.school.Cais.Models.Category;
 import com.school.Cais.Models.Product;
 import com.school.Cais.Models.Subcategory;
 import com.school.Cais.Repositories.ProductRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -51,6 +50,19 @@ public class ProductService {
                 .stream()
                 .map(ProductDTO::fromEntity)
                 .toList();
+    }
+
+    public List<ProductDTO> findBySubcat(Long id) {
+        Subcategory sub = subcategoryRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("subcategory"));
+
+        List<ProductDTO> all = findAll();
+        List<ProductDTO> output = new ArrayList<>();
+        for(ProductDTO pdto : all)
+            if(pdto.subcategory().id().equals(sub.getId()))
+                output.add(pdto);
+
+        return output;
     }
 
     @Transactional

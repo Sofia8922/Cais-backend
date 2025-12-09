@@ -2,11 +2,7 @@ package com.school.Cais.Services;
 
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Categories.CategoryDTO;
-import com.school.Cais.DTOs.Purchases.PurchaseDTO;
-import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Category;
-import com.school.Cais.Models.Product;
-import com.school.Cais.Models.Purchase;
 import com.school.Cais.Repositories.CategoryRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
@@ -18,12 +14,10 @@ import java.util.List;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
-    private final SubcategoryRepository subcategoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, SubcategoryRepository subcategoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
-        this.subcategoryRepository = subcategoryRepository;
     }
 
     @Transactional

@@ -2,6 +2,7 @@ package com.school.Cais.Services;
 
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Categories.CategoryDTO;
+import com.school.Cais.DTOs.Categories.CategoryUpdateDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Category;
@@ -10,6 +11,7 @@ import com.school.Cais.Models.Purchase;
 import com.school.Cais.Repositories.CategoryRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,20 @@ public class CategoryService {
         Category category = createDTO.toEntity();
         Category savedCategory = categoryRepository.save(category);
         return CategoryDTO.fromEntity(savedCategory);
+    }
+
+    public CategoryDTO updateCategory(@Valid Long id, CategoryUpdateDTO dto) {
+        Category category = categoryRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("Category"));
+
+        dto.updateEntity(category);
+        return CategoryDTO.fromEntity(category);
+    }
+
+    public void deleteCategory(Long id) {
+        Category category = categoryRepository.findById(id)
+                .orElseGet(() -> ErrorHandler.notFound("Category"));
+        categoryRepository.delete(category);
     }
 
     public List<CategoryDTO> findAll() {

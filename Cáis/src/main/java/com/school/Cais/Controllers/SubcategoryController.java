@@ -2,6 +2,7 @@ package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Subcategories.SubcategoryCreateDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryDTO;
+import com.school.Cais.DTOs.Subcategories.SubcategoryUpdateDTO;
 import com.school.Cais.Services.SubcategoryService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,17 @@ public class SubcategoryController {
     {
         SubcategoryDTO subDTO = subcategoryService.createSubcategory(createDTO);
         return ResponseEntity.status(HttpStatus.OK).body(subDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SubcategoryDTO> updateSubcategory(@Valid @PathVariable Long id, @RequestBody SubcategoryUpdateDTO dto) {
+        return ResponseEntity.ok(subcategoryService.updateSubcategory(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSubcategory(@PathVariable Long id) {
+        subcategoryService.deleteSubcategory(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping()

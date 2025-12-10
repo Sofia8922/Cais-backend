@@ -6,6 +6,7 @@ import com.school.Cais.Models.Purchase;
 import jakarta.validation.constraints.NotNull;
 
 public record PurchaseShortDTO(
+        Long id,
         @NotNull
         int amount,
         @NotNull
@@ -13,6 +14,7 @@ public record PurchaseShortDTO(
 ) {
     public static PurchaseShortDTO fromEntity(Purchase purchase) {
         return new PurchaseShortDTO(
+            purchase.getId(),
             purchase.getAmount(),
             purchase.getStatus()
         );

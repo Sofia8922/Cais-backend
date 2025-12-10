@@ -1,6 +1,7 @@
 package com.school.Cais.DTOs.Accounts;
 
 import com.school.Cais.DTOs.CartItems.CartItemDTO;
+import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Models.CartItem;
 import com.school.Cais.Models.Product;
@@ -15,14 +16,22 @@ public record AccountDTO(
         String address,
         String phoneNumber,
         List<CartItemDTO> cart,
-        List<Long> favoritesProductIds,
-        List<Long> recentOrderIds,
+        List<ProductDTO> favorites,
+        List<ProductDTO> recentOrders,
         List<String> roles
 ) {
     public static AccountDTO fromEntity(Account account) {
 
         List<CartItemDTO> cartDTOs = account.getCartItems().stream()
-                .map(ci -> new CartItemDTO(ci.getProduct().getId(), ci.getQuantity()))
+                .map(CartItemDTO::fromEntity)
+                .toList();
+
+        List<ProductDTO> favoriteDTOs = account.getFavorites().stream()
+                .map(ProductDTO::fromEntity)
+                .toList();
+
+        List<ProductDTO> recentOrderDTOs = account.getRecentOrders().stream()
+                .map(ProductDTO::fromEntity)
                 .toList();
 
         return new AccountDTO(
@@ -31,8 +40,8 @@ public record AccountDTO(
             account.getAddress(),
             account.getPhoneNumber(),
             cartDTOs,
-            account.getFavorites().stream().map(Product::getId).toList(),
-            account.getRecentOrders().stream().map(Product::getId).toList(),
+            favoriteDTOs,
+            recentOrderDTOs,
             account.getRoles()
         );
     }

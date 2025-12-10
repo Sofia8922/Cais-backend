@@ -29,13 +29,9 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> favorites = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "account_recent_orders",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> recentOrders = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private List<Purchase> recentOrders = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles;
 
@@ -108,11 +104,11 @@ public class Account {
         this.favorites = favorites;
     }
 
-    public List<Product> getRecentOrders() {
+    public List<Purchase> getRecentOrders() {
         return recentOrders;
     }
 
-    public void setRecentOrders(List<Product> recentOrders) {
+    public void setRecentOrders(List<Purchase> recentOrders) {
         this.recentOrders = recentOrders;
     }
 

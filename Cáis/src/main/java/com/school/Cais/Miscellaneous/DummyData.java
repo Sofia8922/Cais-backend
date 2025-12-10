@@ -18,15 +18,13 @@ public class DummyData {
     private boolean starting;
     private final CategoryController categoryController;
     private final ProductController productController;
-    private final PurchaseController purchaseController;
     private final SubcategoryController subcategoryController;
     private final AccountService accountService;
 
     @Autowired
-    public DummyData(CategoryController categoryController, ProductController productController, PurchaseController purchaseController, SubcategoryController subcategoryController, AccountService accountService) {
+    public DummyData(CategoryController categoryController, ProductController productController, SubcategoryController subcategoryController, AccountService accountService) {
         this.categoryController = categoryController;
         this.productController = productController;
-        this.purchaseController = purchaseController;
         this.subcategoryController = subcategoryController;
         this.accountService = accountService;
     }
@@ -81,8 +79,8 @@ public class DummyData {
             new PurchaseCreateDTO(1, 2L),
             new PurchaseCreateDTO(4, 6L)
         };
-        for(PurchaseCreateDTO prcd : purchaseCreateDTOS) {
-            purchaseController.createPurchase(prcd);
-        }
+//        for(PurchaseCreateDTO prcd : purchaseCreateDTOS) {
+//            purchaseController.createPurchase(prcd);
+//        }
     }
 }

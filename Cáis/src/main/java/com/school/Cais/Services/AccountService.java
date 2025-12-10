@@ -4,17 +4,21 @@ import com.school.Cais.DTOs.Accounts.AccountDTO;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
+import com.school.Cais.Miscellaneous.Constants;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Models.CartItem;
 import com.school.Cais.Models.Product;
+import com.school.Cais.Models.Purchase;
 import com.school.Cais.Repositories.AccountRepository;
 import com.school.Cais.Repositories.ProductRepository;
 import jakarta.transaction.Transactional;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -135,6 +139,36 @@ public class  AccountService {
         account.removeFromFavorites(product);
         accountRepository.save(account);
 
+        return AccountDTO.fromEntity(account);
+    }
+
+    @Transactional
+    public AccountDTO createPurchase(Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseGet(() -> ErrorHandler.notFound("Account"));
+
+        List<CartItem> cartItems = new ArrayList<>(account.getCartItems());
+
+        for (CartItem item : cartItems) {
+            Purchase purchase = new Purchase();
+            purchase.setAmount(item.getQuantity());
+            purchase.setProduct(item.getProduct());
+            purchase.setStatus(Constants.DeliveryStatus.PROCESSING);
+
+            account.getRecentOrders().add(purchase);
+        }
+
+        account.getCartItems().clear();
+        accountRepository.save(account);
+        return AccountDTO.fromEntity(account);
+    }
+
+    public AccountDTO removeAllFromCart(Long accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseGet(() -> ErrorHandler.notFound("Account"));
+
+        account.getCartItems().clear();
+        accountRepository.save(account);
         return AccountDTO.fromEntity(account);
     }
 }

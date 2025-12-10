@@ -28,6 +28,12 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @PostMapping
+    public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
+        AccountDTO account = accountService.register(accountRegisterDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(account);
+    }
+
     @GetMapping()
     public ResponseEntity<List<AccountDTO>> getAllAccount() {
         List<AccountDTO> accountDTOs = accountService.findAll();

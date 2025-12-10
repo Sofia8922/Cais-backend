@@ -34,9 +34,6 @@ public record ProductDTO(
             product.getStock(),
             product.getImageLink(),
             SubcategoryDTO.fromEntity(product.getSubcategory())
-//            product.getPurchaseList().stream()
-//                    .map(PurchaseShortDTO::fromEntity)
-//                    .toList()
         );
     }
 }

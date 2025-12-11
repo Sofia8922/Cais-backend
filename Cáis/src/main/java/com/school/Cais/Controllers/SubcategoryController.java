@@ -31,7 +31,7 @@ public class SubcategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubcategoryDTO> updateSubcategory(@Valid @PathVariable Long id, @RequestBody SubcategoryUpdateDTO dto) {
+    public ResponseEntity<SubcategoryDTO> updateSubcategory(@PathVariable Long id, @RequestBody SubcategoryUpdateDTO dto) {
         return ResponseEntity.ok(subcategoryService.updateSubcategory(id, dto));
     }
 

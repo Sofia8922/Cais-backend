@@ -35,14 +35,17 @@ public class CategoryService {
         return CategoryDTO.fromEntity(savedCategory);
     }
 
-    public CategoryDTO updateCategory(@Valid Long id, CategoryUpdateDTO dto) {
+    @Transactional
+    public CategoryDTO updateCategory(Long id, CategoryUpdateDTO dto) {
         Category category = categoryRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Category"));
 
         dto.updateEntity(category);
+        categoryRepository.save(category);
         return CategoryDTO.fromEntity(category);
     }
 
+    @Transactional
     public void deleteCategory(Long id) {
         Category category = categoryRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Category"));

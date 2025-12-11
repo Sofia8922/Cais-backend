@@ -47,15 +47,23 @@ public class SubcategoryService {
             .toList();
     }
 
-    public SubcategoryDTO updateSubcategory(@Valid Long id, SubcategoryUpdateDTO dto) {
+    @Transactional
+    public SubcategoryDTO updateSubcategory(Long id, SubcategoryUpdateDTO dto) {
         Subcategory subcategory = subcategoryRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Subcategory"));
 
-        dto.updateEntity(subcategory);
+        if (dto.categoryId() != null) {
+            Category category = categoryRepository.findById(dto.categoryId())
+                    .orElseGet(() -> ErrorHandler.notFound("Category"));
+
+            subcategory.setCategory(category);
+        }
+        subcategoryRepository.save(subcategory);
 
         return SubcategoryDTO.fromEntity(subcategory);
     }
 
+    @Transactional
     public void deleteSubcategory(Long id) {
         Subcategory subcategory = subcategoryRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Subcategory"));

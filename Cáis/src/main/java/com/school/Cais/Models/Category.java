@@ -25,6 +25,7 @@ public class Category {
     }
 
     public void setName(String name) {
+        System.out.println("Category.setName CALLED WITH: " + name);
         this.name = name;
     }
 }

@@ -14,6 +14,7 @@ public record AccountDTO(
         Long id,
         @NotBlank
         String username,
+        String email,
         String address,
         String phoneNumber,
         List<CartItemDTO> cart,
@@ -38,6 +39,7 @@ public record AccountDTO(
         return new AccountDTO(
             account.getId(),
             account.getUsername(),
+            account.getEmail(),
             account.getAddress(),
             account.getPhoneNumber(),
             cartDTOs,

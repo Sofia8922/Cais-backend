@@ -68,9 +68,9 @@ public class DummyData {
             new ProductCreateDTO("Gouda", "1 kilo", 10.4f, 10, "https://president-professionnel.com/wp-content/uploads/2024/02/gouda-wheel-president.png", 1L),
             new ProductCreateDTO("La Vache Qui Rit", "", 5f, 5, "", 3L),
             new ProductCreateDTO("La Vache Qui Rit (Vegan)", "", 4.5f, 2, "https://www.lavachequirit.ca/wp-content/uploads/2024/01/plant-product-single-768x768.png", 3L),
-            new ProductCreateDTO("Mozzarella", "italiano", 4.65f, 0, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg", 2L),
-            new ProductCreateDTO("Mozzarella Tradizionale", "", 6f, 500, "https://1.bp.blogspot.com/-YJ0fMjTkhk8/Uuejy9zgm2I/AAAAAAAAGFQ/DulK9iYhezc/s1600/Mozzarella.jpg", 2L),
-            new ProductCreateDTO("Standard Cheese Slicer", "The best one", 20f, 0, "", 4L)
+            new ProductCreateDTO("Mozzarella", "italiano", 4.65f, 0, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Three_mozzarellas_on_the_toast.jpg/1280px-Three_mozzarellas_on_the_toast.jpg", 2L),
+            new ProductCreateDTO("Mozzarella Tradizionale", "", 6f, 500, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Three_mozzarellas_on_the_toast.jpg/1280px-Three_mozzarellas_on_the_toast.jpg", 2L),
+            new ProductCreateDTO("Standard Cheese Slicer", "The best one", 20f, 0, "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Kaasschaaf_2022.jpg/1200px-Kaasschaaf_2022.jpg", 4L)
         };
         for(ProductCreateDTO pcd : productCreateDTOS) {
             productController.createProduct(pcd);

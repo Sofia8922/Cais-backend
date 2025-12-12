@@ -21,9 +21,9 @@ public record ProductDTO(
         @NotNull
         int stock,
         String imageLink,
-        @NotNull
-        SubcategoryDTO subcategory,
-        List<PurchaseShortDTO> purchases
+        SubcategoryDTO subcategory
+//        List<PurchaseShortDTO> purchases
+
 ) {
     public static ProductDTO fromEntity(Product product) {
         return new ProductDTO(
@@ -33,8 +33,7 @@ public record ProductDTO(
             product.getPrice(),
             product.getStock(),
             product.getImageLink(),
-            SubcategoryDTO.fromEntity(product.getSubcategory()),
-            product.getPurchaseList().stream().map(PurchaseShortDTO::fromEntity).toList()
+            SubcategoryDTO.fromEntity(product.getSubcategory())
         );
     }
 }

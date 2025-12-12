@@ -6,6 +6,7 @@ import com.school.Cais.Models.Subcategory;
 import jakarta.validation.constraints.NotBlank;
 
 public record SubcategoryDTO(
+        Long id,
         @NotBlank
         String name,
         @NotBlank
@@ -13,6 +14,7 @@ public record SubcategoryDTO(
 ) {
     public static SubcategoryDTO fromEntity(Subcategory sub) {
         return new SubcategoryDTO(
+            sub.getId(),
             sub.getName(),
             CategoryDTO.fromEntity(sub.getCategory())
         );

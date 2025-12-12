@@ -28,6 +28,12 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @PostMapping
+    public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
+        AccountDTO account = accountService.register(accountRegisterDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(account);
+    }
+
     @GetMapping()
     public ResponseEntity<List<AccountDTO>> getAllAccount() {
         List<AccountDTO> accountDTOs = accountService.findAll();
@@ -39,12 +45,6 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findById(id));
     }
 
-
-//    @GetMapping("/cart/{id}")
-//    public ResponseEntity<AccountDTO> getCartByAccountId(@PathVariable Long id) {
-//
-//    }
-
     @PostMapping("/{accountId}/cart/{productId}")
     public ResponseEntity<AccountDTO> addToCart(@PathVariable Long accountId, @PathVariable Long productId, @RequestParam(defaultValue = "1") int amount) {
         return ResponseEntity.ok(accountService.addToCart(accountId, productId, amount));
@@ -53,6 +53,11 @@ public class AccountController {
     @DeleteMapping("/{accountId}/cart/{productId}")
     public ResponseEntity<AccountDTO> removeFromCart(@PathVariable Long accountId, @PathVariable Long productId, @RequestParam(defaultValue = "1") int amount) {
         return ResponseEntity.ok(accountService.removeFromCart(accountId, productId, amount));
+    }
+
+    @PostMapping("/{accountId}/cart")
+    public ResponseEntity<AccountDTO> clearAllFromCart(@PathVariable Long accountId) {
+        return ResponseEntity.ok(accountService.removeAllFromCart(accountId));
     }
 
     @PostMapping("/{accountId}/favorites/{productId}")
@@ -76,5 +81,8 @@ public class AccountController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @PostMapping("/{id}/checkout")
+    public ResponseEntity<AccountDTO> checkout(@PathVariable Long id) {
+        return ResponseEntity.ok(accountService.createPurchase(id));
+    }
 }

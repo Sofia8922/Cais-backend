@@ -2,6 +2,7 @@ package com.school.Cais.DTOs.Accounts;
 
 import com.school.Cais.DTOs.CartItems.CartItemDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
+import com.school.Cais.DTOs.Purchases.PurchaseDTO;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Models.CartItem;
 import com.school.Cais.Models.Product;
@@ -13,11 +14,12 @@ public record AccountDTO(
         Long id,
         @NotBlank
         String username,
+        String email,
         String address,
         String phoneNumber,
         List<CartItemDTO> cart,
         List<ProductDTO> favorites,
-        List<ProductDTO> recentOrders,
+        List<PurchaseDTO> recentOrders,
         List<String> roles
 ) {
     public static AccountDTO fromEntity(Account account) {
@@ -30,13 +32,14 @@ public record AccountDTO(
                 .map(ProductDTO::fromEntity)
                 .toList();
 
-        List<ProductDTO> recentOrderDTOs = account.getRecentOrders().stream()
-                .map(ProductDTO::fromEntity)
+        List<PurchaseDTO> recentOrderDTOs = account.getRecentOrders().stream()
+                .map(PurchaseDTO::fromEntity)
                 .toList();
 
         return new AccountDTO(
             account.getId(),
             account.getUsername(),
+            account.getEmail(),
             account.getAddress(),
             account.getPhoneNumber(),
             cartDTOs,

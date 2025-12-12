@@ -28,4 +28,12 @@ public class Category {
         System.out.println("Category.setName CALLED WITH: " + name);
         this.name = name;
     }
+
+    public List<Subcategory> getSubcategoryList() {
+        return subcategoryList;
+    }
+
+    public void setSubcategoryList(List<Subcategory> subcategoryList) {
+        this.subcategoryList = subcategoryList;
+    }
 }

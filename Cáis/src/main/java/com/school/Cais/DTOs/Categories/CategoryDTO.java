@@ -11,7 +11,7 @@ public record CategoryDTO(
         Long id,
         @NotBlank
         String name,
-        List<SubcategoryShortDTO> subcategory
+        List<SubcategoryShortDTO> subcategories
 ) {
     public static CategoryDTO fromEntity(Category category) {
         return new CategoryDTO(

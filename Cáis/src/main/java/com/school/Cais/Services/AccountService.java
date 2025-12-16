@@ -171,4 +171,14 @@ public class  AccountService {
         accountRepository.save(account);
         return AccountDTO.fromEntity(account);
     }
+
+    public AccountDTO login(String username, String password) {
+        Account account = accountRepository.findByUsername(username);
+
+        if (!passwordEncoder.matches(password, account.getPassword())) {
+            throw new RuntimeException("Invalid thingy");
+        }
+
+        return AccountDTO.fromEntity(account);
+    }
 }

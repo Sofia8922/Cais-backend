@@ -1,8 +1,6 @@
 package com.school.Cais.Controllers;
 
-import com.school.Cais.DTOs.Accounts.AccountDTO;
-import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
-import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
+import com.school.Cais.DTOs.Accounts.*;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Services.AccountService;
@@ -32,6 +30,12 @@ public class AccountController {
     public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
         AccountDTO account = accountService.register(accountRegisterDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(account);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AccountLoginDTO> login(@RequestBody AccountLoginRequestDTO dto) {
+        AccountDTO account = accountService.login(dto.username(), dto.password());
+        return ResponseEntity.ok(new AccountLoginDTO(account.id(), account.username()));
     }
 
     @GetMapping()

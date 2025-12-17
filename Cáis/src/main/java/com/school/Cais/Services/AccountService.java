@@ -158,7 +158,9 @@ public class  AccountService {
             product.setStock(newStock);
             productRepository.save(product);
             Purchase purchase = new Purchase();
+            purchase.setName(item.getName());
             purchase.setAmount(item.getQuantity());
+            purchase.setUnitPrice(item.getProduct().getPrice());
             purchase.setProduct(item.getProduct());
             purchase.setStatus(Constants.DeliveryStatus.PROCESSING);
 

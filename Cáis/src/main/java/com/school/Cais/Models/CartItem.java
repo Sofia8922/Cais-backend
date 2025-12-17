@@ -8,6 +8,7 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
@@ -28,6 +29,14 @@ public class CartItem {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Account getAccount() {

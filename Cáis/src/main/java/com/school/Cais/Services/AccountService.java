@@ -150,6 +150,13 @@ public class  AccountService {
         List<CartItem> cartItems = new ArrayList<>(account.getCartItems());
 
         for (CartItem item : cartItems) {
+            Product product = item.getProduct();
+            int newStock = product.getStock() - item.getQuantity();
+            if (newStock < 0) {
+                throw new RuntimeException("Not enough stock for product: " + product.getName());
+            }
+            product.setStock(newStock);
+            productRepository.save(product);
             Purchase purchase = new Purchase();
             purchase.setAmount(item.getQuantity());
             purchase.setProduct(item.getProduct());

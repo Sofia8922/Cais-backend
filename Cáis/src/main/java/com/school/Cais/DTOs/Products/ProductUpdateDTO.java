@@ -1,7 +1,6 @@
 package com.school.Cais.DTOs.Products;
 
 import com.school.Cais.Models.Product;
-import com.school.Cais.Models.Subcategory;
 
 public record ProductUpdateDTO(
     String name,

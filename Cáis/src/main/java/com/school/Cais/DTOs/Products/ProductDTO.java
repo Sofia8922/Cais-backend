@@ -1,6 +1,5 @@
 package com.school.Cais.DTOs.Products;
 
-import com.school.Cais.DTOs.Purchases.PurchaseDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseShortDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryDTO;
 import com.school.Cais.Models.Product;

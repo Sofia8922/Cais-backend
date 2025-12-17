@@ -3,16 +3,10 @@ package com.school.Cais.Controllers;
 import com.school.Cais.DTOs.Accounts.AccountDTO;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
-import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
-import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Services.AccountService;
-import com.school.Cais.Services.CategoryService;
-import com.school.Cais.Services.CustomUserDetailsService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

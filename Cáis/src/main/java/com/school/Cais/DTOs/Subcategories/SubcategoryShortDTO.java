@@ -1,6 +1,5 @@
 package com.school.Cais.DTOs.Subcategories;
 
-import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Models.Subcategory;
 import jakarta.validation.constraints.NotBlank;
 

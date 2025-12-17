@@ -1,6 +1,5 @@
 package com.school.Cais.DTOs.Purchases;
 
-import com.school.Cais.DTOs.Products.ProductShortDTO;
 import com.school.Cais.Miscellaneous.Constants;
 import com.school.Cais.Models.Purchase;
 import jakarta.validation.constraints.NotNull;

@@ -33,9 +33,9 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AccountLoginDTO> login(@RequestBody AccountLoginRequestDTO dto) {
+    public ResponseEntity<AccountDTO> login(@RequestBody AccountLoginRequestDTO dto) {
         AccountDTO account = accountService.login(dto.username(), dto.password());
-        return ResponseEntity.ok(new AccountLoginDTO(account.id(), account.username()));
+        return ResponseEntity.ok(account);
     }
 
     @GetMapping()

@@ -9,8 +9,10 @@ public class Purchase {
     @Id
     @GeneratedValue
     private Long id;
+    private String name;
     @NotNull
     private int amount;
+    private double unitPrice;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -21,12 +23,28 @@ public class Purchase {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getAmount() {
         return amount;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public Constants.DeliveryStatus getStatus() {

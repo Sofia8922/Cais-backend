@@ -1,8 +1,8 @@
 package com.school.Cais.Controllers;
 
-import com.school.Cais.DTOs.Accounts.AccountDTO;
-import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
-import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
+import com.school.Cais.DTOs.Accounts.*;
+import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
+import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,12 @@ public class AccountController {
     public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
         AccountDTO account = accountService.register(accountRegisterDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(account);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AccountDTO> login(@RequestBody AccountLoginRequestDTO dto) {
+        AccountDTO account = accountService.login(dto.username(), dto.password());
+        return ResponseEntity.ok(account);
     }
 
     @GetMapping()

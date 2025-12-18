@@ -82,5 +82,12 @@ public class DummyData {
 //        for(PurchaseCreateDTO prcd : purchaseCreateDTOS) {
 //            purchaseController.createPurchase(prcd);
 //        }
+        try {
+            accountService.addToCart(1L, 2L, 1);
+            accountService.addToCart(1L, 1L, 5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

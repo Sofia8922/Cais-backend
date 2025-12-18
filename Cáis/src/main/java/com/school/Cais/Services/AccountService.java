@@ -148,8 +148,17 @@ public class  AccountService {
         List<CartItem> cartItems = new ArrayList<>(account.getCartItems());
 
         for (CartItem item : cartItems) {
+            Product product = item.getProduct();
+            int newStock = product.getStock() - item.getQuantity();
+            if (newStock < 0) {
+                throw new RuntimeException("Not enough stock for product: " + product.getName());
+            }
+            product.setStock(newStock);
+            productRepository.save(product);
             Purchase purchase = new Purchase();
+            purchase.setName(item.getName());
             purchase.setAmount(item.getQuantity());
+            purchase.setUnitPrice(item.getProduct().getPrice());
             purchase.setProduct(item.getProduct());
             purchase.setStatus(Constants.DeliveryStatus.PROCESSING);
 
@@ -167,6 +176,16 @@ public class  AccountService {
 
         account.getCartItems().clear();
         accountRepository.save(account);
+        return AccountDTO.fromEntity(account);
+    }
+
+    public AccountDTO login(String username, String password) {
+        Account account = accountRepository.findByUsername(username);
+
+        if (!passwordEncoder.matches(password, account.getPassword())) {
+            throw new RuntimeException("Invalid thingy");
+        }
+
         return AccountDTO.fromEntity(account);
     }
 }

@@ -1,7 +1,6 @@
 package com.school.Cais.Services;
 
 import com.school.Cais.DTOs.Accounts.AccountDTO;
-import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Repositories.AccountRepository;

@@ -4,13 +4,11 @@ import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Products.ProductDTO;
 import com.school.Cais.DTOs.Products.ProductUpdateDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
-import com.school.Cais.Models.Category;
 import com.school.Cais.Models.Product;
 import com.school.Cais.Models.Subcategory;
 import com.school.Cais.Repositories.ProductRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

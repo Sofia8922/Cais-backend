@@ -1,6 +1,5 @@
 package com.school.Cais.Models;
 
-import com.school.Cais.Controllers.CategoryController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 

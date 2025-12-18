@@ -2,7 +2,6 @@ package com.school.Cais.DTOs.Categories;
 
 import com.school.Cais.Models.Category;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record CategoryCreateDTO(
         @NotBlank

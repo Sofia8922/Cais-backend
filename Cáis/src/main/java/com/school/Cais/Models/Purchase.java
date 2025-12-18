@@ -12,7 +12,6 @@ public class Purchase {
     private String name;
     @NotNull
     private int amount;
-    private float unitPrice;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -37,14 +36,6 @@ public class Purchase {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public float getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(float unitPrice) {
-        this.unitPrice = unitPrice;
     }
 
     public Constants.DeliveryStatus getStatus() {

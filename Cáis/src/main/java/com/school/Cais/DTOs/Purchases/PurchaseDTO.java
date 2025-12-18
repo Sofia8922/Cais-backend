@@ -9,7 +9,6 @@ public record PurchaseDTO(
         Long id,
         @NotNull
         int amount,
-        double unitPrice,
         @NotNull
         Constants.DeliveryStatus status,
         @NotNull
@@ -19,7 +18,6 @@ public record PurchaseDTO(
         return new PurchaseDTO(
             purchase.getId(),
             purchase.getAmount(),
-            purchase.getUnitPrice(),
             purchase.getStatus(),
             ProductShortDTO.fromEntity(purchase.getProduct())
         );

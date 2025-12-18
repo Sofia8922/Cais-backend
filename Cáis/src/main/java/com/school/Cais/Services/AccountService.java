@@ -155,6 +155,7 @@ public class  AccountService {
             }
             product.setStock(newStock);
             productRepository.save(product);
+
             Purchase purchase = new Purchase();
             purchase.setName(item.getName());
             purchase.setAmount(item.getQuantity());

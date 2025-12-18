@@ -12,7 +12,7 @@ public class Purchase {
     private String name;
     @NotNull
     private int amount;
-    private double unitPrice;
+    private float unitPrice;
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -39,11 +39,11 @@ public class Purchase {
         this.amount = amount;
     }
 
-    public double getUnitPrice() {
+    public float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
 

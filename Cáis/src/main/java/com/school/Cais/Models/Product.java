@@ -16,7 +16,7 @@ public class Product {
     private String name;
     private String description;
     @NotNull
-    private Float price;
+    private float price;
     @NotNull
     private int stock;
     @ManyToOne
@@ -57,11 +57,11 @@ public class Product {
         this.description = description;
     }
 
-    public Float getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

@@ -39,21 +39,21 @@ public class EmailService {
     private void sendEmail(String recepient, Constants.Email email) {
         final String TOKEN = "fb3ea2499818b3db2142fec5b2cb1d34";
 
-
         final MailtrapConfig config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
-
         final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
 
         final MailtrapMail generatedMail = MailtrapMail.builder()
-                .from(new Address("noreply@demomailtrap.co", "Cáis"))
+                .from(new Address(Constants.CáisEmail, Constants.CáisEmailName))
                 .to(List.of(new Address(recepient)))
                 .subject(email.title())
                 .html(email.content())
                 .category("Integration Test")
                 .build();
-
+        System.out.println(Constants.CáisEmail);
+        System.out.println(Constants.CáisEmailName);
+        System.out.println(recepient);
         try {
             System.out.println(client.send(generatedMail));
         } catch (Exception e) {

@@ -4,16 +4,20 @@ import java.util.List;
 
 public class Constants {
     public static String Password = "thoushaltneverguessmwahahaha";
+    public static String UserEmail = "cheeseshop666@proton.me";
     public enum Role { ADMIN, CUSTOMER }
     public enum DeliveryStatus { PROCESSING, UNDERWAY, DELIVERED, CANCELLED }
 
-    public static String Email = "cheeseshop666@proton.me";
+    //-----------------------------------
+    public static String CáisEmail = "noreply@demomailtrap.co";
+    public static String CáisEmailName = "Cáis";
+    public record PurchasedItem(String name, int quantity) {}
     public record Email(String title, String content) {
         public Email {
             content = "<html><body>" + content + "</body></html>";
         }
     }
-    public record PurchasedItem(String name, int quantity) {}
+
     public static Email PurchaseMail(String username, List<PurchasedItem> items) {
         StringBuilder itemString = new StringBuilder();
         for(PurchasedItem item : items)

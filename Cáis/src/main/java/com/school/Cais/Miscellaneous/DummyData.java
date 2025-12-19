@@ -49,15 +49,15 @@ public class DummyData {
         }
         //----------------------------------------------------
         CategoryCreateDTO[] categoryCreateDTOS = {
-            new CategoryCreateDTO("Cheese"),
+            new CategoryCreateDTO("\uD83E\uDDC0 Cheese"),
             new CategoryCreateDTO("Slicer")
         };
         for(CategoryCreateDTO ccd : categoryCreateDTOS) {
             categoryController.createCategory(ccd);
         }
         SubcategoryCreateDTO[] subcategoryCreateDTOS = {
-            new SubcategoryCreateDTO("Dutch cheeses", 1L),
-            new SubcategoryCreateDTO("Italian cheeses", 1L),
+            new SubcategoryCreateDTO("\uD83C\uDDF3\uD83C\uDDF1 Dutch cheeses", 1L),
+            new SubcategoryCreateDTO("\uD83C\uDDEE\uD83C\uDDF9 Italian cheeses", 1L),
             new SubcategoryCreateDTO("Other cheeses", 1L),
             new SubcategoryCreateDTO("Basic slicers", 2L)
         };

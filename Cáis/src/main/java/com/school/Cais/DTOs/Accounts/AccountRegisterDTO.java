@@ -9,12 +9,14 @@ public record AccountRegisterDTO(
         @NotBlank
         String username,
         String password,
+        String email,
         List<String> roles
 ) {
     public Account toEntity() {
         Account account = new Account();
         account.setUsername(username);
         account.setPassword(password);
+        account.setEmail(email);
         account.setRoles(roles);
         return account;
     }

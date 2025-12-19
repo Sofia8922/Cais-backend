@@ -24,12 +24,14 @@ public class  AccountService {
     private final AccountRepository accountRepository;
     private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder) {
+    public AccountService(AccountRepository accountRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         this.accountRepository = accountRepository;
         this.productRepository = productRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
@@ -146,6 +148,8 @@ public class  AccountService {
                 .orElseGet(() -> ErrorHandler.notFound("Account"));
 
         List<CartItem> cartItems = new ArrayList<>(account.getCartItems());
+
+        emailService.sendPurchaseEmail(account);
 
         for (CartItem item : cartItems) {
             Product product = item.getProduct();

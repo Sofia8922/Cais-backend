@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 public class DummyData {
-    private boolean starting;
+    private static boolean starting;
     private final CategoryController categoryController;
     private final ProductController productController;
     private final SubcategoryController subcategoryController;
@@ -29,7 +29,7 @@ public class DummyData {
         this.accountController = accountController;
     }
 
-    public boolean isStarting() {
+    public static boolean isStarting() {
         return starting;
     }
 
@@ -38,11 +38,12 @@ public class DummyData {
 
     @PostConstruct
     public void createData() {
+        starting = true;
 
         AccountRegisterDTO[] accountRegisterDTOs = {
-            new AccountRegisterDTO("a", "trex", List.of("ADMIN")),
-            new AccountRegisterDTO("b", "lolfunny", List.of("USER")),
-            new AccountRegisterDTO("c", "idkwhy", List.of("USER"))
+            new AccountRegisterDTO("a", Constants.Password, Constants.Email, List.of("ADMIN")),
+            new AccountRegisterDTO("b", Constants.Password, Constants.Email, List.of("USER")),
+            new AccountRegisterDTO("c", Constants.Password, Constants.Email, List.of("USER"))
         };
         for(AccountRegisterDTO ard : accountRegisterDTOs) {
             accountController.register(ard);
@@ -105,6 +106,8 @@ public class DummyData {
         for(cartInfo ci : cartInfosNotSold) {
             accountController.addToCart(ci.acc, ci.prod, ci.amount);
         }
+
+        starting = false;
     }
 }
 

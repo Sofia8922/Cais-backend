@@ -40,9 +40,9 @@ public class DummyData {
     public void createData() {
 
         AccountRegisterDTO[] accountRegisterDTOs = {
-            new AccountRegisterDTO("a", "1", List.of("ADMIN")),
-            new AccountRegisterDTO("b", "2", List.of("USER")),
-            new AccountRegisterDTO("c", "3", List.of("USER"))
+            new AccountRegisterDTO("a", "trex", List.of("ADMIN")),
+            new AccountRegisterDTO("b", "lolfunny", List.of("USER")),
+            new AccountRegisterDTO("c", "idkwhy", List.of("USER"))
         };
         for(AccountRegisterDTO ard : accountRegisterDTOs) {
             accountController.register(ard);
@@ -59,7 +59,7 @@ public class DummyData {
             new SubcategoryCreateDTO("\uD83C\uDDF3\uD83C\uDDF1 Dutch cheeses", 1L),
             new SubcategoryCreateDTO("\uD83C\uDDEE\uD83C\uDDF9 Italian cheeses", 1L),
             new SubcategoryCreateDTO("\uD83E\uDDC0 Other cheeses", 1L),
-            new SubcategoryCreateDTO("\uD83D\uDD2A Basic slicers", 2L)
+            new SubcategoryCreateDTO("\uD83D\uDD2A .Basic slicers", 2L)
         };
         for(SubcategoryCreateDTO sccd : subcategoryCreateDTOS) {
             subcategoryController.createSubcategory(sccd);

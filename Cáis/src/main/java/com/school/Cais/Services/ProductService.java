@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -47,6 +48,7 @@ public class ProductService {
     public List<ProductDTO> findAll() {
         return productRepository.findAll()
                 .stream()
+                .sorted(Comparator.comparing(Product::getId))
                 .map(ProductDTO::fromEntity)
                 .toList();
     }

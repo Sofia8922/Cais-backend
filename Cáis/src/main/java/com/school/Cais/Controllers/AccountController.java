@@ -1,8 +1,6 @@
 package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Accounts.*;
-import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
-import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

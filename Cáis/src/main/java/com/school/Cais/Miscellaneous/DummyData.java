@@ -50,7 +50,7 @@ public class DummyData {
         //----------------------------------------------------
         CategoryCreateDTO[] categoryCreateDTOS = {
             new CategoryCreateDTO("\uD83E\uDDC0 Cheese"),
-            new CategoryCreateDTO("Slicer")
+            new CategoryCreateDTO("\uD83D\uDD2A Slicer")
         };
         for(CategoryCreateDTO ccd : categoryCreateDTOS) {
             categoryController.createCategory(ccd);
@@ -58,8 +58,8 @@ public class DummyData {
         SubcategoryCreateDTO[] subcategoryCreateDTOS = {
             new SubcategoryCreateDTO("\uD83C\uDDF3\uD83C\uDDF1 Dutch cheeses", 1L),
             new SubcategoryCreateDTO("\uD83C\uDDEE\uD83C\uDDF9 Italian cheeses", 1L),
-            new SubcategoryCreateDTO("Other cheeses", 1L),
-            new SubcategoryCreateDTO("Basic slicers", 2L)
+            new SubcategoryCreateDTO("\uD83E\uDDC0 Other cheeses", 1L),
+            new SubcategoryCreateDTO("\uD83D\uDD2A Basic slicers", 2L)
         };
         for(SubcategoryCreateDTO sccd : subcategoryCreateDTOS) {
             subcategoryController.createSubcategory(sccd);

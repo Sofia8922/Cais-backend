@@ -48,7 +48,7 @@ public class EmailService {
         final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
 
         final MailtrapMail generatedMail = MailtrapMail.builder()
-                .from(new Address("noreply@demomailtrap.co", "Cheese Shop"))
+                .from(new Address("noreply@demomailtrap.co", "Cáis"))
                 .to(List.of(new Address(recepient)))
                 .subject(email.title())
                 .text(email.content())

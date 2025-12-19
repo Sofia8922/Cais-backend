@@ -67,7 +67,7 @@ public class DummyData {
         //----------------------------------------------------
         ProductCreateDTO[] productCreateDTOS = {
             new ProductCreateDTO("Brie", "1 kg. Brie is a soft cow's-milk cheese named after Brie. The rind is typically eaten, with its flavour depending largely upon the ingredients used and its manufacturing environment.", 3.45f, 40, "broken link here", 3L),
-            new ProductCreateDTO("Gouda", "1 kg", 10.4f, 104, "https://president-professionnel.com/wp-content/uploads/2024/02/gouda-wheel-president.png", 1L),
+            new ProductCreateDTO("Gouda", "ᛅᛚᛁᛦ᛬ᛘᛁᚾ᛬ᛁᛦᚢ᛬ᛒᚢᚱᚾᛁᛦ᛬ᚠᚱᛁᛅᛚᛋᛁᛦ᛬ᛅᚢᚴ᛬ᛁᛅᚠᚾᛁᛦ᛬ᛅᛏ᛬ᚢᛁᚱᚦᛁᚴᚢ᛬ᛅᚢᚴ᛬ᚱᛁᛏᚢᛘ᛬ᚦᛅᛁᛦ᛬ᛁᛦᚢ᛬ᛅᛚᛁᛦ᛬ᚢᛁᛏᛁ᛬ᚴᚢᛏᛁᛦ᛬ᛅᚢᚴ᛬ᛋᛅᛘᚢᛁᛋᚴᚢ᛬ᛅᚢᚴ᛬ᛋᚴᚢᛚᚢ᛬ᚴᛅᚱᛅ᛬ᚼᚢᛅᛦ᛬ᛏᛁᛚ᛬ᛅᚾᛅᚱᛋ᛬ᛒᚱᚢᚦᚢᚱᛚᛁᚴᛅ ", 10.4f, 104, "https://president-professionnel.com/wp-content/uploads/2024/02/gouda-wheel-president.png", 1L),
             new ProductCreateDTO("La Vache Qui Rit", "", 4.5f, 0, "", 3L),
             new ProductCreateDTO("La Vache Qui Rit (Vegan)", "", 4.5f, 231, "https://www.lavachequirit.ca/wp-content/uploads/2024/01/plant-product-single-768x768.png", 3L),
             new ProductCreateDTO("Mozzarella", "\uD83C\uDDEE\uD83C\uDDF9 italiano \uD83C\uDDEE\uD83C\uDDF9", 4.65f, 3, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Three_mozzarellas_on_the_toast.jpg/1280px-Three_mozzarellas_on_the_toast.jpg", 2L),

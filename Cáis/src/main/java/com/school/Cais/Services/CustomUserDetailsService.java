@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) {
-        Account account = accountRepository.findByUsername(name);
+        Account account = accountRepository.findByUsernameIgnoreCase(name);
         if(account == null) ErrorHandler.notFound("account");
 
         var authorities = account.getRoles()

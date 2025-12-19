@@ -24,6 +24,10 @@ public class ErrorHandler {
         return throwError("There are only " + amount + " products \"" + topic + "\" left in stock", HttpStatus.CONFLICT);
     }
 
+    public static <T> T wrong(String topic){
+        return throwError("Wrong " + topic, HttpStatus.FORBIDDEN);
+    }
+
     private static <T> T throwError(String message, HttpStatus status) {
         message = message.substring(0, 1).toUpperCase() + message.substring(1);
         ResponseStatusException ex = new ResponseStatusException(status, message);

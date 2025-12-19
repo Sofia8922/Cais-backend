@@ -184,10 +184,10 @@ public class  AccountService {
     }
 
     public AccountDTO login(String username, String password) {
-        Account account = accountRepository.findByUsername(username);
+        Account account = accountRepository.findByUsernameIgnoreCase(username);
 
-        if (!passwordEncoder.matches(password, account.getPassword())) {
-            throw new RuntimeException("Invalid thingy");
+        if (account == null || !passwordEncoder.matches(password, account.getPassword())) {
+            ErrorHandler.wrong("account or password");
         }
 
         return AccountDTO.fromEntity(account);

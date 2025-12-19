@@ -41,9 +41,9 @@ public class DummyData {
         starting = true;
 
         AccountRegisterDTO[] accountRegisterDTOs = {
-            new AccountRegisterDTO("a", Constants.Password, Constants.Email, List.of("ADMIN")),
-            new AccountRegisterDTO("b", Constants.Password, Constants.Email, List.of("USER")),
-            new AccountRegisterDTO("c", Constants.Password, Constants.Email, List.of("USER"))
+            new AccountRegisterDTO("A", Constants.Password, Constants.Email, List.of("ADMIN")),
+            new AccountRegisterDTO("B", Constants.Password, Constants.Email, List.of("USER")),
+            new AccountRegisterDTO("C", Constants.Password, Constants.Email, List.of("USER"))
         };
         for(AccountRegisterDTO ard : accountRegisterDTOs) {
             accountController.register(ard);

@@ -2,7 +2,6 @@ package com.school.Cais.Services;
 
 import com.school.Cais.Miscellaneous.Constants;
 import com.school.Cais.Miscellaneous.DummyData;
-import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Models.CartItem;
 import org.springframework.stereotype.Service;
@@ -51,7 +50,7 @@ public class EmailService {
                 .from(new Address("noreply@demomailtrap.co", "Cáis"))
                 .to(List.of(new Address(recepient)))
                 .subject(email.title())
-                .text(email.content())
+                .html(email.content())
                 .category("Integration Test")
                 .build();
 

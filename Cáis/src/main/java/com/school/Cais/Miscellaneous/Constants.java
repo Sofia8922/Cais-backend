@@ -11,7 +11,7 @@ public class Constants {
     //-----------------------------------
     public static String CáisEmail = "noreply@demomailtrap.co";
     public static String CáisEmailName = "Cáis";
-    public record PurchasedItem(String name, int quantity) {}
+    public record PurchasedItem(String name, int quantity, String imageLink) {}
     public record Email(String title, String content) {
         public Email {
             content = "<html><body>" + content + "</body></html>";
@@ -21,7 +21,11 @@ public class Constants {
     public static Email PurchaseMail(String username, List<PurchasedItem> items) {
         StringBuilder itemString = new StringBuilder();
         for(PurchasedItem item : items)
-            itemString.append("<b>" + item.quantity + " × " + item.name + "</b><br>");
+            itemString.append("<b style=\"display: flex; align-items: center;\">" +
+                    "<img src=\"" + item.imageLink + "\" width=\"25\" height=\"25\" style=\"border-radius: 50%; margin-right: 5px;\">" +
+                    " " + item.quantity +
+                    " × " + item.name +
+                    "</b><br>");
 
         return new Email(
             "Thank you for your purchase!",

@@ -26,7 +26,8 @@ public class EmailService {
             purchasedItems.add(
                 new Constants.PurchasedItem(
                     cartItem.getProduct().getName(),
-                    cartItem.getQuantity()
+                    cartItem.getQuantity(),
+                    cartItem.getProduct().getImageLink()
                 )
             );
         }

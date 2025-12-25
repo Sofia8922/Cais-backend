@@ -29,10 +29,10 @@ public class Constants {
 
         return new Email(
             "Thank you for your purchase!",
-            "<h1>Dear " + username + ",</h1>" +
+            "<h3>Dear " + username + ",</h3>" +
                     "Thank you for your purchase at Cáis!<br><br>" +
                     "You bought:<br>" +
                     itemString +
-                    "<br>We hope to see you again soon!"
+                    "<br><h3>We hope to see you again soon!</h3>"
     ); }
 }

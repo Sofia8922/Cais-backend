@@ -33,6 +33,6 @@ public class Constants {
                     "Thank you for your purchase at Cáis!<br><br>" +
                     "You bought:<br>" +
                     itemString +
-                    "<br><h3>We hope to see you again soon!</h3>"
+                    "<h3>We hope to see you again soon!</h3>"
     ); }
 }

@@ -20,7 +20,7 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
         AccountDTO account = accountService.register(accountRegisterDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(account);

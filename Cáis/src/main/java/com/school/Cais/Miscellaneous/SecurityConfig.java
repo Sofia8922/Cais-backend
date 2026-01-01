@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,23 +33,44 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST,"/accounts/register").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/accounts/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/accounts/login", "/accounts/register", "/accounts/logout").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/accounts").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/accounts/*").hasRole("ADMIN")
 
-//                        .requestMatchers(HttpMethod.GET,"/accounts").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/accounts")
-                        .hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/accounts/*/cart/*", "/accounts/*/cart", "/accounts/*/favorites/*").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/accounts/*/cart/*", "/accounts/*/favorites/*").authenticated()
 
+                        .requestMatchers(HttpMethod.POST, "/accounts/*").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/accounts/*").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/accounts/*/checkout").authenticated()
 
+                        .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
 
-//                        .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                        .requestMatchers(HttpMethod.GET, "/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/categories/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/subcategories/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/subcategories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/subcategories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/subcategories/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                        .anyRequest().authenticated()
+//                                .anyRequest().permitAll()
                 )
-//                .httpBasic(Customizer.withDefaults());
+
 //                .httpBasic(AbstractHttpConfigurer::disable)
-                .userDetailsService(userDetailsService);
+                .userDetailsService(userDetailsService)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 

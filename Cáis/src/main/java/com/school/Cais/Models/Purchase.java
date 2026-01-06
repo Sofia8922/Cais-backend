@@ -17,6 +17,7 @@ public class Purchase {
     private Product product;
     @NotNull
     private Constants.DeliveryStatus status;
+    @ManyToOne
     private Account user;
 
     public Long getId() {

@@ -62,6 +62,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/subcategories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/subcategories/**").hasRole("ADMIN")
 
+                        .requestMatchers(HttpMethod.PUT, "/purchases/**").hasRole("ADMIN")
+
                         .requestMatchers(HttpMethod.GET, "/roles/**").permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()

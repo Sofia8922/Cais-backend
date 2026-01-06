@@ -2,7 +2,6 @@ package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Purchases.PurchaseDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseUpdateDTO;
-import com.school.Cais.Models.Product;
 import com.school.Cais.Services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ public class PurchaseController {
     @Autowired
     public PurchaseController(PurchaseService purchaseService) { this.purchaseService = purchaseService; }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<PurchaseDTO> updatePurchase(@PathVariable Long id, @RequestBody PurchaseUpdateDTO dto) {
         return ResponseEntity.ok(purchaseService.editById(id, dto));
     }

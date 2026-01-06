@@ -17,6 +17,7 @@ public class Purchase {
     private Product product;
     @NotNull
     private Constants.DeliveryStatus status;
+    private Account user;
 
     public Long getId() {
         return id;
@@ -52,5 +53,13 @@ public class Purchase {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Account getUser() {
+        return user;
+    }
+
+    public void setUser(Account user) {
+        this.user = user;
     }
 }

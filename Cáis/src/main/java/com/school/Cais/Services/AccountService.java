@@ -173,6 +173,7 @@ public class  AccountService {
             purchase.setAmount(item.getQuantity());
             purchase.setProduct(item.getProduct());
             purchase.setStatus(Constants.DeliveryStatus.PROCESSING);
+            purchase.setUser(account);
 
             account.getRecentOrders().add(purchase);
         }

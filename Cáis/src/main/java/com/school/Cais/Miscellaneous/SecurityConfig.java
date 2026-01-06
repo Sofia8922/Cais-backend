@@ -40,12 +40,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/accounts").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET,"/accounts/*").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.POST, "/accounts/*/cart/*", "/accounts/*/cart", "/accounts/*/favorites/*").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/accounts/*/cart/*", "/accounts/*/favorites/*").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/accounts/*/cart/*", "/accounts/*/cart", "/accounts/*/favorites/*").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/accounts/*/cart/*", "/accounts/*/favorites/*").permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/accounts/*").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/accounts/*").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/accounts/*/checkout").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/accounts/*").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/accounts/*").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/accounts/*/checkout").permitAll()
 
                         .requestMatchers(HttpMethod.GET,"/products/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
@@ -61,6 +61,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/subcategories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/subcategories/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/subcategories/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/roles/**").permitAll()
 
                         .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                         .anyRequest().authenticated()

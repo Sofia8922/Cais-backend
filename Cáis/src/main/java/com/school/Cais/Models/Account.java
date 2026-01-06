@@ -1,5 +1,6 @@
 package com.school.Cais.Models;
 
+import com.school.Cais.Miscellaneous.Enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -32,14 +33,22 @@ public class Account {
     @JoinColumn(name = "account_id")
     private List<Purchase> recentOrders = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    @Enumerated(EnumType.STRING)
+    private List<Role> roles = new ArrayList<>();
 
     public Account() {
     }
 
-    public Account(String username, String password, List<String> roles) {
+    public Account(String username, String password, List<Role> roles) {
         this.username = username;
         this.password = password;
+        this.roles = roles;
+    }
+
+    public Account(String username, String password, String email, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
         this.roles = roles;
     }
 
@@ -111,11 +120,11 @@ public class Account {
         this.recentOrders = recentOrders;
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

@@ -5,6 +5,7 @@ import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryCreateDTO;
+import com.school.Cais.Miscellaneous.Enums.Role;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,9 +40,9 @@ public class DummyData {
         starting = true;
 
         AccountRegisterDTO[] accountRegisterDTOs = {
-            new AccountRegisterDTO("A", Constants.Password, Constants.UserEmail, List.of("ADMIN")),
-            new AccountRegisterDTO("B", Constants.Password, Constants.UserEmail, List.of("USER")),
-            new AccountRegisterDTO("C", Constants.Password, Constants.UserEmail, List.of("USER"))
+            new AccountRegisterDTO("A", Constants.Password, Constants.UserEmail, List.of(Role.ADMIN)),
+            new AccountRegisterDTO("B", Constants.Password, Constants.UserEmail, List.of(Role.USER)),
+            new AccountRegisterDTO("C", Constants.Password, Constants.UserEmail, List.of(Role.USER))
         };
         for(AccountRegisterDTO ard : accountRegisterDTOs) {
             accountController.register(ard);

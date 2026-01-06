@@ -37,6 +37,10 @@ public record AccountDTO(
                 .map(PurchaseDTO::fromEntity)
                 .toList();
 
+        List<String> roleDTO = account.getRoles().stream()
+                .map(Enum::name)
+                .toList();
+
         return new AccountDTO(
             account.getId(),
             account.getUsername(),
@@ -46,7 +50,7 @@ public record AccountDTO(
             cartDTOs,
             favoriteDTOs,
             recentOrderDTOs,
-            account.getRoles()
+            roleDTO
         );
     }
 }

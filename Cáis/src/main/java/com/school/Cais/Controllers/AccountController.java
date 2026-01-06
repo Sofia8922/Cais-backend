@@ -2,15 +2,20 @@ package com.school.Cais.Controllers;
 
 import com.school.Cais.DTOs.Accounts.*;
 import com.school.Cais.Services.AccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin("*")
 @RequestMapping("/accounts")
 public class AccountController {
     private final AccountService accountService;
@@ -20,16 +25,23 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<AccountDTO> register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
         AccountDTO account = accountService.register(accountRegisterDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(account);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AccountDTO> login(@RequestBody AccountLoginRequestDTO dto) {
-        AccountDTO account = accountService.login(dto.username(), dto.password());
+    public ResponseEntity<AccountDTO> login(@RequestBody AccountLoginRequestDTO dto, HttpServletRequest request) {
+        AccountDTO account = accountService.login(dto, request);
         return ResponseEntity.ok(account);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        SecurityContextHolder.clearContext();
+        return ResponseEntity.ok("Logged out");
     }
 
     @GetMapping()

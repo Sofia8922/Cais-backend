@@ -1,6 +1,7 @@
 package com.school.Cais.Services;
 
 import com.school.Cais.DTOs.Accounts.AccountDTO;
+import com.school.Cais.DTOs.Accounts.AccountLoginRequestDTO;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
 import com.school.Cais.Miscellaneous.Constants;
@@ -11,8 +12,13 @@ import com.school.Cais.Models.Product;
 import com.school.Cais.Models.Purchase;
 import com.school.Cais.Repositories.AccountRepository;
 import com.school.Cais.Repositories.ProductRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,13 +31,15 @@ public class  AccountService {
     private final ProductRepository productRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public AccountService(AccountRepository accountRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
+    public AccountService(AccountRepository accountRepository, ProductRepository productRepository, PasswordEncoder passwordEncoder, EmailService emailService, AuthenticationManager authenticationManager) {
         this.accountRepository = accountRepository;
         this.productRepository = productRepository;
         this.passwordEncoder = passwordEncoder;
         this.emailService = emailService;
+        this.authenticationManager = authenticationManager;
     }
 
     public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
@@ -183,12 +191,22 @@ public class  AccountService {
         return AccountDTO.fromEntity(account);
     }
 
-    public AccountDTO login(String username, String password) {
-        Account account = accountRepository.findByUsernameIgnoreCase(username);
-
-        if (account == null || !passwordEncoder.matches(password, account.getPassword())) {
-            ErrorHandler.wrong("account or password");
+    public AccountDTO login(AccountLoginRequestDTO dto, HttpServletRequest request) {
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(dto.username(), dto.password())
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            request.getSession(true);
+        } catch (Exception e) {
+            System.out.println("Authentication failed: " + e.getClass() + " - " + e.getMessage());
+            throw new RuntimeException("invalid username or password");
         }
+        Account account = accountRepository.findByUsernameIgnoreCase(dto.username());
+
+//        if (account == null || !passwordEncoder.matches(password, account.getPassword())) {
+//            ErrorHandler.wrong("account or password");
+//        }
 
         return AccountDTO.fromEntity(account);
     }

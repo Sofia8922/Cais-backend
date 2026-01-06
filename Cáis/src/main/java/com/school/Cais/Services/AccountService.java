@@ -20,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,6 +44,9 @@ public class  AccountService {
     }
 
     public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+        if (accountRepository.existsByUsername(accountRegisterDTO.username())) {
+            throw new IllegalArgumentException("not allowed");
+        }
         Account account = accountRegisterDTO.toEntity();
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.save(account);
@@ -197,7 +201,11 @@ public class  AccountService {
                     new UsernamePasswordAuthenticationToken(dto.username(), dto.password())
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            request.getSession(true);
+            request.getSession(true)
+            .setAttribute(
+                    HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                    SecurityContextHolder.getContext()
+            );
         } catch (Exception e) {
             System.out.println("Authentication failed: " + e.getClass() + " - " + e.getMessage());
             throw new RuntimeException("invalid username or password");

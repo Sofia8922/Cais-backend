@@ -4,6 +4,7 @@ import com.school.Cais.Controllers.*;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
+import com.school.Cais.DTOs.Purchases.PurchaseUpdateDTO;
 import com.school.Cais.DTOs.Subcategories.SubcategoryCreateDTO;
 import com.school.Cais.Miscellaneous.Enums.Role;
 import jakarta.annotation.PostConstruct;
@@ -19,21 +20,23 @@ public class DummyData {
     private final ProductController productController;
     private final SubcategoryController subcategoryController;
     private final AccountController accountController;
+    private final PurchaseController purchaseController;
 
     @Autowired
-    public DummyData(CategoryController categoryController, ProductController productController, SubcategoryController subcategoryController, AccountController accountController) {
+    public DummyData(CategoryController categoryController, ProductController productController, SubcategoryController subcategoryController, AccountController accountController, PurchaseController purchaseController) {
         this.categoryController = categoryController;
         this.productController = productController;
         this.subcategoryController = subcategoryController;
         this.accountController = accountController;
+        this.purchaseController = purchaseController;
     }
 
     public static boolean isStarting() {
         return starting;
     }
 
-    private record cartInfo (long acc, long prod, int amount) {
-    }
+    private record cartInfo (long acc, long prod, int amount) {}
+    private record purchaseUpdate (long id, PurchaseUpdateDTO purchaseUpdateDTO) {}
 
     @PostConstruct
     public void createData() {
@@ -66,7 +69,7 @@ public class DummyData {
         }
         //----------------------------------------------------
         ProductCreateDTO[] productCreateDTOS = {
-            new ProductCreateDTO("Brie", "1 kg. Brie is a soft cow's-milk cheese named after Brie. The rind is typically eaten, with its flavour depending largely upon the ingredients used and its manufacturing environment.", 3.45f, 40, "broken link here", 3L),
+            new ProductCreateDTO("Brie", "1 kg. Brie is a soft cow's-milk cheese named after Brie. The rind is typically eaten, with its flavour depending largely upon the ingredients used and its manufacturing environment.", 3.45f, 540, "broken link here", 3L),
             new ProductCreateDTO("Bavarian Blue Cheese", "", 19.5f, 250, "https://upload.wikimedia.org/wikipedia/commons/2/24/Bavaria_blu_01_WikiCheese_Lokal_K.jpg", 3L),
             new ProductCreateDTO("Gouda", "ᛅᛚᛁᛦ᛬ᛘᛁᚾ᛬ᛁᛦᚢ᛬ᛒᚢᚱᚾᛁᛦ᛬ᚠᚱᛁᛅᛚᛋᛁᛦ᛬ᛅᚢᚴ᛬ᛁᛅᚠᚾᛁᛦ᛬ᛅᛏ᛬ᚢᛁᚱᚦᛁᚴᚢ᛬ᛅᚢᚴ᛬ᚱᛁᛏᚢᛘ᛬ᚦᛅᛁᛦ᛬ᛁᛦᚢ᛬ᛅᛚᛁᛦ᛬ᚢᛁᛏᛁ᛬ᚴᚢᛏᛁᛦ᛬ᛅᚢᚴ᛬ᛋᛅᛘᚢᛁᛋᚴᚢ᛬ᛅᚢᚴ᛬ᛋᚴᚢᛚᚢ᛬ᚴᛅᚱᛅ᛬ᚼᚢᛅᛦ᛬ᛏᛁᛚ᛬ᛅᚾᛅᚱᛋ᛬ᛒᚱᚢᚦᚢᚱᛚᛁᚴᛅ ", 10.4f, 104, "https://president-professionnel.com/wp-content/uploads/2024/02/gouda-wheel-president.png", 1L),
             new ProductCreateDTO("Mascarpone", "", 10f, 470, "https://ichu.com.hk/wp-content/uploads/2025/02/mascarpone-cheese-recipe-1739314048.jpg", 2L),
@@ -90,11 +93,14 @@ public class DummyData {
         }
         //---------------------------------------------------
         cartInfo[] cartInfos = {
+            new cartInfo(1L, 1L, 1),
             new cartInfo(1L, 3L, 1),
             new cartInfo(1L, 10L, 13),
+            new cartInfo(2L, 1L, 7),
             new cartInfo(2L, 2L, 1),
             new cartInfo(2L, 7L, 3),
             new cartInfo(2L, 10L, 50),
+            new cartInfo(3L, 1L, 5),
             new cartInfo(3L, 10L, 20)
         };
         for(cartInfo ci : cartInfos) {
@@ -104,6 +110,36 @@ public class DummyData {
         {
             accountController.checkout(id);
         }
+
+        purchaseUpdate[] purchaseUpdates = {
+            new purchaseUpdate(1L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
+            new purchaseUpdate(2L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY)),
+            new purchaseUpdate(3L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY)),
+            new purchaseUpdate(4L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
+            new purchaseUpdate(5L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY)),
+            new purchaseUpdate(6L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
+            new purchaseUpdate(7L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
+            new purchaseUpdate(8L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY))
+        };
+        for(purchaseUpdate pu : purchaseUpdates) {
+            purchaseController.updatePurchase(pu.id, pu.purchaseUpdateDTO);
+        }
+
+        cartInfo[] cartInfosNonupdated = {
+            new cartInfo(1L, 6L, 12),
+            new cartInfo(2L, 1L, 3),
+            new cartInfo(2L, 17L, 3),
+            new cartInfo(2L, 18L, 3),
+            new cartInfo(3L, 1L, 4)
+        };
+        for(cartInfo ci : cartInfosNonupdated) {
+            accountController.addToCart(ci.acc, ci.prod, ci.amount);
+        }
+        for(long id = 1; id <= 3; id++)
+        {
+            accountController.checkout(id);
+        }
+
         cartInfo[] cartInfosNotSold = {
            new cartInfo(1L, 3L, 5),
            new cartInfo(2L, 8L, 2),

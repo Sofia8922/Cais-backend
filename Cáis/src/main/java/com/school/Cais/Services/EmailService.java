@@ -38,7 +38,7 @@ public class EmailService {
     }
 
     private void sendEmail(String recepient, Constants.Email email) {
-        final String TOKEN = "fb3ea2499818b3db2142fec5b2cb1d34";
+        final String TOKEN = "88253b21b771c37fd92bba153d84a1a2";
 
         final MailtrapConfig config = new MailtrapConfig.Builder()
                 .token(TOKEN)

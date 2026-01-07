@@ -118,7 +118,7 @@ public class DummyData {
             new purchaseUpdate(4L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
             new purchaseUpdate(5L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY)),
             new purchaseUpdate(6L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
-            new purchaseUpdate(7L, new PurchaseUpdateDTO(Constants.DeliveryStatus.DELIVERED)),
+            new purchaseUpdate(7L, new PurchaseUpdateDTO(Constants.DeliveryStatus.CANCELLED)),
             new purchaseUpdate(8L, new PurchaseUpdateDTO(Constants.DeliveryStatus.UNDERWAY))
         };
         for(purchaseUpdate pu : purchaseUpdates) {

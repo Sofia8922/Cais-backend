@@ -3,7 +3,7 @@ package com.school.Cais.Miscellaneous;
 import java.util.List;
 
 public class Constants {
-    public static String Password = "thoushaltneverguessmwahahaha";
+    public static String Password = "password";
     //public static String UserEmail = "caisshop@proton.me";
     public static String UserEmail = "[pre-presentation placeholder]";
     public enum Role { ADMIN, CUSTOMER }

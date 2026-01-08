@@ -16,7 +16,7 @@ public class PurchaseController {
     @Autowired
     public PurchaseController(PurchaseService purchaseService) { this.purchaseService = purchaseService; }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public ResponseEntity<PurchaseDTO> updatePurchase(@PathVariable Long id, @RequestBody PurchaseUpdateDTO dto) {
         return ResponseEntity.ok(purchaseService.editById(id, dto));
     }

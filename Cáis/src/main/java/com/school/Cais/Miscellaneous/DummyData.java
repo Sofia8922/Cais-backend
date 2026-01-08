@@ -53,7 +53,9 @@ public class DummyData {
         //----------------------------------------------------
         CategoryCreateDTO[] categoryCreateDTOS = {
             new CategoryCreateDTO("\uD83E\uDDC0 Cheeses"),
-            new CategoryCreateDTO("\uD83D\uDD2A Slicers")
+            new CategoryCreateDTO("\uD83D\uDD2A Slicers"),
+//            new CategoryCreateDTO("\uD83D\uDC80 Unassigned")
+                new CategoryCreateDTO("Unassigned")
         };
         for(CategoryCreateDTO ccd : categoryCreateDTOS) {
             categoryController.createCategory(ccd);

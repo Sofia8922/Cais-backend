@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 public record SubcategoryCreateDTO(
         @NotBlank
         String name,
-        @NotBlank
+//        @NotBlank
         Long categoryId
 ) {
     public Subcategory toEntity() {

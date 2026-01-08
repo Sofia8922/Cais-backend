@@ -5,6 +5,7 @@ import com.school.Cais.DTOs.Categories.CategoryDTO;
 import com.school.Cais.DTOs.Categories.CategoryUpdateDTO;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Category;
+import com.school.Cais.Models.Subcategory;
 import com.school.Cais.Repositories.CategoryRepository;
 import com.school.Cais.Repositories.SubcategoryRepository;
 import jakarta.transaction.Transactional;
@@ -45,6 +46,23 @@ public class CategoryService {
     public void deleteCategory(Long id) {
         Category category = categoryRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Category"));
+
+        Category unassignedCategory = categoryRepository.findByName("Unassigned")
+                .orElseGet(() -> ErrorHandler.notFound("Unassigned"));
+
+        if (category.getId().equals(unassignedCategory.getId())) {
+            ErrorHandler.notFound("Cannot delete Unassigned category");
+        }
+        for (Subcategory sub : category.getSubcategoryList()) {
+            sub.setCategory(unassignedCategory);
+        }
+
+        category.getSubcategoryList().clear();
+//        boolean hasProducts = category.getSubcategoryList().stream()
+//                        .anyMatch(sc -> !sc.getProductList().isEmpty());
+//        if (hasProducts) {
+//            ErrorHandler.notFound("category contains products");
+//        }
         categoryRepository.delete(category);
     }
 

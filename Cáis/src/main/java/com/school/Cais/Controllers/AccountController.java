@@ -80,8 +80,9 @@ public class AccountController {
         return ResponseEntity.ok(accountService.removeFromFavorites(accountId, productId));
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<AccountDTO> editAccountById(@PathVariable Long id, @RequestBody AccountUpdateDTO dto) {
+        System.out.println(dto);
         return ResponseEntity.ok(accountService.editAccountById(id, dto));
     }
 

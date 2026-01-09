@@ -45,6 +45,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/accounts/*").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/accounts/*").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/accounts/*").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/accounts/*/checkout").permitAll()
 
                         .requestMatchers(HttpMethod.GET,"/products/**").permitAll()

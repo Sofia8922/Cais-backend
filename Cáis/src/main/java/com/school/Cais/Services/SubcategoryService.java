@@ -56,6 +56,7 @@ public class SubcategoryService {
 
             subcategory.setCategory(category);
         }
+        dto.updateEntity(subcategory);
         subcategoryRepository.save(subcategory);
 
         return SubcategoryDTO.fromEntity(subcategory);

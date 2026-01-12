@@ -5,6 +5,7 @@ import com.school.Cais.DTOs.Accounts.AccountLoginRequestDTO;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
 import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
 import com.school.Cais.Miscellaneous.Constants;
+import com.school.Cais.Miscellaneous.Enums.Role;
 import com.school.Cais.Miscellaneous.ErrorHandler;
 import com.school.Cais.Models.Account;
 import com.school.Cais.Models.CartItem;
@@ -78,6 +79,10 @@ public class  AccountService {
     public void deleteAccountById(Long id) {
         Account account = accountRepository.findById(id)
                 .orElseGet(() -> ErrorHandler.notFound("Account"));
+
+        if(account.getRoles().contains(Role.ADMIN))
+            ErrorHandler.notPossible("delete the admin account");
+
         accountRepository.delete(account);
     }
 

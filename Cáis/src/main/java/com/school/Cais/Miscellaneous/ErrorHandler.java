@@ -25,7 +25,7 @@ public class ErrorHandler {
     }
 
     public static <T> T wrong(String topic){
-        return throwError("Wrong " + topic, HttpStatus.FORBIDDEN);
+        return throwError("You many not " + topic, HttpStatus.FORBIDDEN);
     }
 
     private static <T> T throwError(String message, HttpStatus status) {
@@ -33,6 +33,10 @@ public class ErrorHandler {
         ResponseStatusException ex = new ResponseStatusException(status, message);
         System.out.println(ex.getMessage());
         throw new ResponseStatusException(status, message);
+    }
+
+    public static <T> T notPossible(String topic){
+        return throwError("Wrong " + topic, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(ResponseStatusException.class)

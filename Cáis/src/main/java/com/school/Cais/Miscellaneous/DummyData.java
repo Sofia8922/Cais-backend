@@ -2,6 +2,7 @@ package com.school.Cais.Miscellaneous;
 
 import com.school.Cais.Controllers.*;
 import com.school.Cais.DTOs.Accounts.AccountRegisterDTO;
+import com.school.Cais.DTOs.Accounts.AccountUpdateDTO;
 import com.school.Cais.DTOs.Categories.CategoryCreateDTO;
 import com.school.Cais.DTOs.Products.ProductCreateDTO;
 import com.school.Cais.DTOs.Purchases.PurchaseUpdateDTO;
@@ -45,12 +46,23 @@ public class DummyData {
         AccountRegisterDTO[] accountRegisterDTOs = {
             new AccountRegisterDTO("Alice", Constants.Password, Constants.UserEmail, List.of(Role.ADMIN)),
             new AccountRegisterDTO("Brandon", Constants.Password, Constants.UserEmail, List.of(Role.USER)),
-            new AccountRegisterDTO("Chloë", Constants.Password, "fake@email.ru", List.of(Role.USER)),
-            new AccountRegisterDTO("David", Constants.Password, "lol@notanemail.nl", List.of(Role.USER)),
+            new AccountRegisterDTO("Chloë", Constants.Password, Constants.UserEmail, List.of(Role.USER)),
+            new AccountRegisterDTO("David", Constants.Password, Constants.UserEmail, List.of(Role.USER)),
             new AccountRegisterDTO("Elena", Constants.Password, Constants.UserEmail, List.of(Role.USER))
         };
         for(AccountRegisterDTO ard : accountRegisterDTOs) {
             accountController.register(ard);
+        }
+
+        AccountUpdateDTO[] accountUpdateDTOs = {
+                new AccountUpdateDTO("Alice", Constants.UserEmail, "Amsterdamsestraatweg 1, Baarn", "+ 31 (0)35 541 28 41"),
+                new AccountUpdateDTO("Brandon", Constants.UserEmail, "Paris, France", "+ 33 (0)8 92 70 00 16"),
+                new AccountUpdateDTO("Chloë", "lol@notanemail.nl", "Platz der Republik 1, Berlin", ""),
+                new AccountUpdateDTO("David", "fake@email.ru", " Museumstraat 1, Amsterdam", "+31 (0) 20 6747 000"),
+                new AccountUpdateDTO("Elena", Constants.UserEmail, "Museumstraat 1, Amsterdam", "+31 (0) 20 6747 000")
+        };
+        for(long i = 1; i <= accountUpdateDTOs.length; i++) {
+            accountController.editAccountById(i, accountUpdateDTOs[(int)i -1]);
         }
         //----------------------------------------------------
         CategoryCreateDTO[] categoryCreateDTOS = {

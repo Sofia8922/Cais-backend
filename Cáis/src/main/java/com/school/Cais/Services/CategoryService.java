@@ -70,6 +70,7 @@ public class CategoryService {
         return categoryRepository.findAll()
             .stream()
             .map(CategoryDTO::fromEntity)
+            .filter(dto -> !dto.name().contains("%%%"))
             .toList();
     }
 }

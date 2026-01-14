@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Constants {
     public static String Password = "password";
-    public static String UserEmail = "caisshop@proton.me";
-    //public static String UserEmail = "[pre-presentation placeholder]";
+    //public static String UserEmail = "caisshop@proton.me";
+    public static String UserEmail = "[pre-presentation placeholder]";
     public enum Role { ADMIN, CUSTOMER }
     public enum DeliveryStatus { PROCESSING, UNDERWAY, DELIVERED, CANCELLED }
 
